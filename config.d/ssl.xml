@@ -10,16 +10,20 @@
       <privateKeyFile>/etc/clickhouse-server/certs/server.key</privateKeyFile>
       <!-- <caConfig>/etc/clickhouse-server/marsnet_ca.crt</caConfig> -->
       <!-- <dhParamsFile>/etc/clickhouse-server/dh_params.pem</dhParamsFile> -->
-      <verificationMode>none</verificationMode>
-      <loadDefaultCAFile>true</loadDefaultCAFile>
+      <!-- <verificationMode>none</verificationMode>
+      <loadDefaultCAFile>true</loadDefaultCAFile> -->
+      <verificationMode>strict</verificationMode>
+      <loadDefaultCAFile>false</loadDefaultCAFile>
+      <preferServerCiphers>true</preferServerCiphers>
       <cacheSessions>true</cacheSessions>
+      <caConfig>/ca_chain.crt</caConfig>
       <!-- <cipherList>ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-GCM-SHA384
       </cipherList>
       <preferServerCiphers>true</preferServerCiphers>
       <requireTLSv1_2>true</requireTLSv1_2>
       <disableProtocols>sslv2,sslv3,tlsv1,tlsv1_1,tlsv1_2,tlsv1_3</disableProtocols> -->
-      <requireTLSv1_2>false</requireTLSv1_2>
-      <disableProtocols>sslv2,sslv3,tlsv1,tlsv1_1,tlsv1_2,tlsv1_3</disableProtocols>
+      <!-- <requireTLSv1_2>false</requireTLSv1_2> -->
+      <!-- <disableProtocols>sslv2,sslv3</disableProtocols> -->
     </server>
   </openSSL>
 </clickhouse>

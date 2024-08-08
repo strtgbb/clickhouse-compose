@@ -1,10 +1,9 @@
 version: '2.3'
 
 services:
-  clickhouse: 
-    image: clickhouse/clickhouse-server:24.1
+  clickhouse1: 
+    image: clickhouse/clickhouse-server:24.6
     init: true
-    # user: root
     ports:
       - "8123:8123"
       - "8443:8443"
@@ -14,10 +13,22 @@ services:
       - "9100:9100"
     volumes:
       - "./config.d:/etc/clickhouse-server/config.d"
-      - "./certs:/etc/clickhouse-server/certs"
-      # - "./clickhouse.crt:/etc/clickhouse-server/server.crt"
-      # - "./clickhouse.key:/etc/clickhouse-server/server.key"
-      # - "./marsnet_ca.crt:/etc/clickhouse-server/marsnet_ca.crt"
-      - "./logs/clickhouse:/var/log/clickhouse-server"
+      - "./ssl_client.xml:/etc/clickhouse-client/config.xml"
+      - "./missing-ca-chain-certs/clickhouse1.key:/etc/clickhouse-server/certs/server.key"
+      - "./missing-ca-chain-certs/clickhouse1.crt:/etc/clickhouse-server/certs/server.crt"
+      # - "./missing-ca-chain-certs/ca_chain.crt:/ca_chain.crt"
+      - "./missing-ca-chain-certs/missing_ca_chain.crt:/ca_chain.crt"
+      - "./logs/clickhouse1:/var/log/clickhouse-server"
+      
+  clickhouse2: 
+    image: clickhouse/clickhouse-server:24.6
+    init: true
+    volumes:
+      - "./config.d:/etc/clickhouse-server/config.d"
+      - "./ssl_client.xml:/etc/clickhouse-client/config.xml"
+      - "./missing-ca-chain-certs/clickhouse2.crt:/etc/clickhouse-server/certs/server.crt"
+      - "./missing-ca-chain-certs/clickhouse2.key:/etc/clickhouse-server/certs/server.key"
+      - "./missing-ca-chain-certs/ca_chain.crt:/ca_chain.crt"
+      - "./logs/clickhouse2:/var/log/clickhouse-server"
 
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+  <openSSL>
+    <client>
+      <!-- openssl req -subj "/CN=localhost" -new -newkey rsa:2048 -days 365 -nodes -x509 -keyout server.key -out server.crt -->
+      <certificateFile>/etc/clickhouse-server/certs/server.crt</certificateFile>
+      <privateKeyFile>/etc/clickhouse-server/certs/server.key</privateKeyFile>
+      <verificationMode>strict</verificationMode>
+      <loadDefaultCAFile>false</loadDefaultCAFile>
+      <preferServerCiphers>true</preferServerCiphers>
+      <cacheSessions>true</cacheSessions>
+      <caConfig>/ca_chain.crt</caConfig>
+    </client>
+  </openSSL>
+</config>
+
