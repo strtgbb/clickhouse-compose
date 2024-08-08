@@ -1,0 +1,23 @@
+version: '2.3'
+
+services:
+  clickhouse: 
+    image: clickhouse/clickhouse-server:24.1
+    init: true
+    # user: root
+    ports:
+      - "8123:8123"
+      - "8443:8443"
+      - "9440:9440"
+      - "9000:9000"
+      - "9019:9019"
+      - "9100:9100"
+    volumes:
+      - "./config.d:/etc/clickhouse-server/config.d"
+      - "./certs:/etc/clickhouse-server/certs"
+      # - "./clickhouse.crt:/etc/clickhouse-server/server.crt"
+      # - "./clickhouse.key:/etc/clickhouse-server/server.key"
+      # - "./marsnet_ca.crt:/etc/clickhouse-server/marsnet_ca.crt"
+      - "./logs/clickhouse:/var/log/clickhouse-server"
+
+
